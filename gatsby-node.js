@@ -16,14 +16,14 @@ exports.createPages = ({ actions }) => {
 
   createRedirect({
     fromPath: "/about-1/",
-    toPath: "/about/",
+    toPath: "/about",
     isPermanent: true,
     force: true,
   })
 
   createRedirect({
     fromPath: "/about-all",
-    toPath: "/about",
+    toPath: "/page-3",
     statusCode: 200,
   })
 }
