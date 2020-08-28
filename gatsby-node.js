@@ -6,24 +6,24 @@
 
 // You can delete this file if you're not using it
 exports.createPages = ({ actions }) => {
-  const { createRedirect } = actions;
+  const { createRedirect } = actions
   createRedirect({
-    fromPath: "/about",
-    toPath: "/about-2",
+    fromPath: "/about-2",
+    toPath: "/about",
     isPermanent: true,
-    force: true
-  });
+    force: true,
+  })
 
   createRedirect({
-    fromPath: "/about/",
-    toPath: "/about-2/",
+    fromPath: "/about-1/",
+    toPath: "/about/",
     isPermanent: true,
-    force: true
-  });
+    force: true,
+  })
 
   createRedirect({
     fromPath: "/about-all",
-    toPath: "/about-2",
-    statusCode: 200
-  });
-};
+    toPath: "/about",
+    statusCode: 200,
+  })
+}
