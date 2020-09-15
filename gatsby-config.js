@@ -13,7 +13,23 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `abhi-plugin-fastly`,
+    {
+      resolve: `abhi-plugin-fastly`,
+      options: {
+        mergeSecurityHeaders: true, // boolean to turn off the default security headers
+        mergeLinkHeaders: true, // boolean to turn off the default gatsby js headers
+        mergeCachingHeaders: true, // boolean to turn off the default caching headers
+        headers: {
+          "/*": ["Basic-Auth: user:password"],
+          "/about/": ["Basic-Auth: user1:password1"],
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/dashboard/*`] },
+    },
+
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
