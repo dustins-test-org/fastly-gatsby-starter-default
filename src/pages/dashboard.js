@@ -6,6 +6,8 @@ const Dashboard = () => {
   return (
     <h2>
       Dashboard
+      <br />
+      {location.pathname}
       {location.search}
     </h2>
   )
