@@ -16,12 +16,28 @@ module.exports = {
     {
       resolve: `gatsby-plugin-gatsby-cloud`,
       options: {
-        mergeSecurityHeaders: true, // boolean to turn off the default security headers
-        mergeLinkHeaders: true, // boolean to turn off the default gatsby js headers
-        mergeCachingHeaders: true, // boolean to turn off the default caching headers
+        mergeSecurityHeaders: false,
         headers: {
-          "/*": ["Basic-Auth: user:password"],
-          "/about/": ["Basic-Auth: user1:password1"],
+          "/dashboard/previews/login": [],
+        },
+        // Some CMS Iframe Preview URLs.
+        // When they have password protection or authentication required
+        // the iframe is routed to the dashboard. We need to enable framing of this route
+        transformHeaders: (headers, path) => {
+          // clone
+          const newHeaders = headers.slice(0)
+
+          if (new RegExp("/dashboard/previews/login").test(path)) {
+            return newHeaders
+          }
+
+          return [
+            "X-Frame-Options: DENY",
+            "X-XSS-Protection: 1; mode=block",
+            "X-Content-Type-Options: nosniff",
+            "Referrer-Policy: same-origin",
+            ...newHeaders,
+          ]
         },
       },
     },
